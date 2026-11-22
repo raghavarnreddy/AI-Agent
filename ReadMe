@@ -1,1 +1,18 @@
-Created a agent
+# Alfred Party Agent: smolagents CodeAgent on a Local Model
+
+A party-planning AI agent built with [smolagents](https://huggingface.co/docs/smolagents), 
+
+Alfred, the Wayne family butler, uses a `CodeAgent` to plan a party at Wayne Manor: he finds a playlist, suggests a menu, picks a caterer and a theme, and calculates preparation time.
+
+Unlike the original course notebook, this version runs on a **free local model** (Qwen2.5-Coder 7B served by Ollama on a Colab T4 GPU) instead of the paid Hugging Face Inference API.
+
+## How a CodeAgent works
+
+The model writes Python code, smolagents runs it in a restricted interpreter, and the printed output goes back to the model on the **next** step. The loop repeats until the code calls `final_answer(...)`.
+
+## Tech stack
+
+- **Agent framework:** smolagents (`CodeAgent`)
+- **Model:** `qwen2.5-coder:7b` via [Ollama](https://ollama.com), connected through `LiteLLMModel`
+- **Runtime:** Google Colab, T4 GPU
+- **Observability:** Langfuse (OpenTelemetry)
